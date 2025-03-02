@@ -9,6 +9,7 @@ const SystemStatus: React.FC = () => {
     try {
       setStatus('checking');
       const health = await checkHealth();
+      console.log(health)
       setStatus(health.status === 'ok' ? 'online' : 'offline');
     } catch (error) {
       setStatus('offline');

@@ -11,6 +11,13 @@ const api = axios.create({
   },
 });
 
+const health = axios.create({ 
+  baseURL: 'https://bettingrobotbackend.onrender.com',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
 export const fetchAllMatches = async (): Promise<Match[]> => {
   const response = await api.get<Match[]>('/matches');
   return response.data;
@@ -47,6 +54,6 @@ export const triggerTodaysMatchesScraping = async (): Promise<ApiResponse<any>> 
 };
 
 export const checkHealth = async (): Promise<{ status: string }> => {
-  const response = await api.get<{ status: string }>('/health');
+  const response = await health.get<{ status: string }>('/health');
   return response.data;
 };
