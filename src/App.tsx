@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -7,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import UpcomingMatches from './pages/UpcomingMatches';
 import TodaysMatches from './pages/TodaysMatches';
 import CompletedMatches from './pages/CompletedMatches';
+import AIAnalysis from './pages/AIAnalysis';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
             <Route path="/upcoming" element={<UpcomingMatches />} />
             <Route path="/today" element={<TodaysMatches />} />
             <Route path="/completed" element={<CompletedMatches />} />
+            <Route path="/analysis" element={<AIAnalysis />} />
           </Routes>
         </main>
         

@@ -21,3 +21,38 @@ export interface ApiResponse<T> {
   success: boolean;
   message?: string;
 }
+
+export interface OddsAnalysis {
+  date: string;
+  homeWinRate: number;
+  drawRate: number;
+  awayWinRate: number;
+  averageHomeOdds: number;
+  averageDrawOdds: number;
+  averageAwayOdds: number;
+  totalMatches: number;
+}
+
+export interface LeaguePerformance {
+  league: string;
+  homeWinRate: number;
+  drawRate: number;
+  awayWinRate: number;
+  totalMatches: number;
+}
+
+export interface OddsPattern {
+  pattern: string;
+  occurrences: number;
+  successRate: number;
+  averageOdds: number;
+  profitMargin: number;
+}
+
+export interface WeeklyInsight {
+  week: string;
+  topPattern: string;
+  profitability: number;
+  confidence: number;
+  recommendation: string;
+}

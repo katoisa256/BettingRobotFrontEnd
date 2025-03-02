@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, Calendar, CheckCircle, Clock, Home } from 'lucide-react';
+import { BarChart3, Calendar, CheckCircle, Clock, Home, Brain } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -61,6 +61,16 @@ const Navbar: React.FC = () => {
                   <span>Completed</span>
                 </div>
               </Link>
+              
+              <Link 
+                to="/analysis" 
+                className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700 ${isActive('/analysis')}`}
+              >
+                <div className="flex items-center gap-2">
+                  <Brain className="h-4 w-4" />
+                  <span>AI Analysis</span>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -68,7 +78,7 @@ const Navbar: React.FC = () => {
       
       {/* Mobile menu */}
       <div className="md:hidden border-t border-blue-700">
-        <div className="grid grid-cols-4 text-center">
+        <div className="grid grid-cols-5 text-center">
           <Link 
             to="/" 
             className={`py-3 ${isActive('/')}`}
@@ -99,6 +109,14 @@ const Navbar: React.FC = () => {
           >
             <CheckCircle className="h-5 w-5 mx-auto" />
             <span className="text-xs">Completed</span>
+          </Link>
+          
+          <Link 
+            to="/analysis" 
+            className={`py-3 ${isActive('/analysis')}`}
+          >
+            <Brain className="h-5 w-5 mx-auto" />
+            <span className="text-xs">Analysis</span>
           </Link>
         </div>
       </div>
