@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Match, ApiResponse, OddsAnalysis, LeaguePerformance, OddsPattern, WeeklyInsight } from '../types';
 
-// const API_URL = 'http://localhost:3000/api';
-const API_URL = 'https://bettingrobotbackend.onrender.com/api';
+
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 const api = axios.create({
   baseURL: API_URL,
@@ -11,12 +11,13 @@ const api = axios.create({
   },
 });
 
-const health = axios.create({ 
-    baseURL: 'https://bettingrobotbackend.onrender.com',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+const health = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
 
 export const fetchAllMatches = async (): Promise<Match[]> => {
   const response = await api.get<Match[]>('/matches');
