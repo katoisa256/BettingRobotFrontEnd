@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
               <a href="https://github.com/katoisa256/BettingRobotFrontEnd" className="flex items-center gap-1 text-gray-400 hover:text-white mr-4">
                 <Github className="h-5 w-5" /> <p>Source Code</p>
               </a>
-              <a href="#" className="text-gray-400 hover:text-white">
+              <a href="https://github.com/katoisa256/BettingRobotFrontEnd/blob/main/%F0%9F%93%9C%20Terms%20of%20Service.md" className="text-gray-400 hover:text-white">
                 Terms of Service
               </a>
             </div>
