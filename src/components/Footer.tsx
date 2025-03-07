@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
               &copy; {new Date().getFullYear()} BettingDashboard. All rights reserved.
             </p>
             <div className="flex items-center justify-center md:justify-end mt-2">
-              <a href="#" className="text-gray-400 hover:text-white mr-4">
+              <a href="https://github.com/katoisa256/BettingRobotFrontEnd" className="text-gray-400 hover:text-white mr-4">
                 <Github className="h-5 w-5" />
               </a>
               <a href="#" className="text-gray-400 hover:text-white">
