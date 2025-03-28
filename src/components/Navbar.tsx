@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, Calendar, CheckCircle, Clock, Home, Brain } from 'lucide-react';
+import { BarChart3, Calendar, CheckCircle, Clock, Home, Brain, LineChart } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -68,7 +68,17 @@ const Navbar: React.FC = () => {
               >
                 <div className="flex items-center gap-2">
                   <Brain className="h-4 w-4" />
-                  <span>AI Analysis</span>
+                  <span>Analysis</span>
+                </div>
+              </Link>
+
+              <Link 
+                to="/predictions" 
+                className={`px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700 ${isActive('/predictions')}`}
+              >
+                <div className="flex items-center gap-2">
+                  <LineChart className="h-4 w-4" />
+                  <span>Predictions</span>
                 </div>
               </Link>
             </div>
@@ -78,7 +88,7 @@ const Navbar: React.FC = () => {
       
       {/* Mobile menu */}
       <div className="md:hidden border-t border-blue-700">
-        <div className="grid grid-cols-5 text-center">
+        <div className="grid grid-cols-6 text-center">
           <Link 
             to="/" 
             className={`py-3 ${isActive('/')}`}
@@ -117,6 +127,14 @@ const Navbar: React.FC = () => {
           >
             <Brain className="h-5 w-5 mx-auto" />
             <span className="text-xs">Analysis</span>
+          </Link>
+
+          <Link 
+            to="/predictions" 
+            className={`py-3 ${isActive('/predictions')}`}
+          >
+            <LineChart className="h-5 w-5 mx-auto" />
+            <span className="text-xs">Predictions</span>
           </Link>
         </div>
       </div>

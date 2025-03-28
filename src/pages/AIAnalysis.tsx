@@ -1,48 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { Brain, RefreshCw, TrendingUp, Zap } from 'lucide-react';
-import { 
-  fetchWeeklyOddsAnalysis, 
-  fetchLeaguePerformance, 
-  fetchOddsPatterns,
-  fetchWeeklyInsights
-} from '../services/api';
-import { 
-  OddsAnalysis, 
-  LeaguePerformance, 
-  OddsPattern,
-  WeeklyInsight
-} from '../types';
-import WeeklyOddsChart from '../components/analysis/WeeklyOddsChart';
-import AverageOddsChart from '../components/analysis/AverageOddsChart';
-import LeaguePerformanceChart from '../components/analysis/LeaguePerformanceChart';
-import PatternCard from '../components/analysis/PatternCard';
-import WeeklyInsightCard from '../components/analysis/WeeklyInsightCard';
+import { Brain, RefreshCw, AlertTriangle } from 'lucide-react';
+import { analyzePatterns } from '../services/api';
+import { PatternAnalysis } from '../types';
+import OddsSelector from '../components/analysis/OddsSelector';
+import SimilarOddsPattern from '../components/analysis/SimilarOddsPattern';
+import SpecificOddsPattern from '../components/analysis/SpecificOddsPattern';
 
 const AIAnalysis: React.FC = () => {
-  const [weeklyOdds, setWeeklyOdds] = useState<OddsAnalysis[]>([]);
-  const [leaguePerformance, setLeaguePerformance] = useState<LeaguePerformance[]>([]);
-  const [oddsPatterns, setOddsPatterns] = useState<OddsPattern[]>([]);
-  const [weeklyInsights, setWeeklyInsights] = useState<WeeklyInsight[]>([]);
+  const [patternAnalysis, setPatternAnalysis] = useState<PatternAnalysis | null>(null);
+  const [selectedOdd, setSelectedOdd] = useState<number>(1.00);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
+  const [usingSampleData, setUsingSampleData] = useState(false);
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [oddsData, leagueData, patternsData, insightsData] = await Promise.all([
-        fetchWeeklyOddsAnalysis(),
-        fetchLeaguePerformance(),
-        fetchOddsPatterns(),
-        fetchWeeklyInsights()
-      ]);
-      
-      setWeeklyOdds(oddsData);
-      setLeaguePerformance(leagueData);
-      setOddsPatterns(patternsData);
-      setWeeklyInsights(insightsData);
+      const patternsData = await analyzePatterns();
+      setPatternAnalysis(patternsData);
       setLastUpdated(new Date());
+      setUsingSampleData(true); // Set to true when using mock data
     } catch (error) {
       console.error('Error fetching analysis data:', error);
+      // Use sample data as fallback
+      setPatternAnalysis({
+        patternOneResults: generateSamplePatternOneData(),
+        patternTwoResults: generateSamplePatternTwoData()
+      });
+      setUsingSampleData(true);
     } finally {
       setLoading(false);
     }
@@ -81,51 +66,91 @@ const AIAnalysis: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <div className="flex items-center gap-2 mb-4">
-          <Zap className="h-5 w-5 text-yellow-500" />
-          <h2 className="text-xl font-semibold">AI-Powered Insights</h2>
+      {usingSampleData && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+          <div className="flex items-center">
+            <AlertTriangle className="h-5 w-5 text-yellow-400 mr-2" />
+            <p className="text-yellow-700">
+              Currently displaying sample data for demonstration purposes.
+            </p>
+          </div>
         </div>
-        <p className="text-gray-600 mb-4">
-          Our advanced AI algorithms analyze thousands of matches to identify patterns, trends, and profitable betting opportunities. 
-          The system continuously learns from new data to improve prediction accuracy and identify value bets.
-        </p>
-      </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <WeeklyOddsChart data={weeklyOdds} />
-        <AverageOddsChart data={weeklyOdds} />
-      </div>
-      
+      )}
+
       <div className="mb-6">
-        <LeaguePerformanceChart data={leaguePerformance} />
+        <OddsSelector selectedOdd={selectedOdd} onOddChange={setSelectedOdd} />
       </div>
-      
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-4">
-          <TrendingUp className="h-5 w-5 text-blue-600" />
-          <h2 className="text-xl font-semibold">Identified Betting Patterns</h2>
+
+      {patternAnalysis && (
+        <div className="space-y-8">
+          <SimilarOddsPattern patterns={patternAnalysis.patternOneResults} />
+          <SpecificOddsPattern 
+            patterns={patternAnalysis.patternTwoResults}
+            selectedOdd={selectedOdd}
+          />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {oddsPatterns.map((pattern, index) => (
-            <PatternCard key={index} pattern={pattern} />
-          ))}
-        </div>
-      </div>
-      
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <Brain className="h-5 w-5 text-indigo-600" />
-          <h2 className="text-xl font-semibold">Weekly Betting Insights</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {weeklyInsights.slice(0, 4).map((insight, index) => (
-            <WeeklyInsightCard key={index} insight={insight} />
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
+};
+
+// Sample data generation functions
+const generateSamplePatternOneData = () => {
+  const timeSlots = ['morning', 'afternoon', 'evening'];
+  const teams = [
+    ['Arsenal', 'Chelsea'], 
+    ['Liverpool', 'Man City'],
+    ['Man United', 'Tottenham'],
+    ['Newcastle', 'Brighton']
+  ];
+  
+  return teams.flatMap(([home, away]) => ([
+    {
+      match: {
+        id: Math.random().toString(),
+        homeTeam: home,
+        awayTeam: away,
+        homeOdds: '1.00',
+        drawOdds: '2.30',
+        awayOdds: '2.30',
+        kickoff: new Date().toISOString(),
+        league: 'Premier League',
+        matchResult: 'HOME_WIN' as const
+      },
+      pattern: 'similar_draw_away',
+      timeSlot: timeSlots[Math.floor(Math.random() * timeSlots.length)],
+      result: 'HOME_WIN'
+    }
+  ]));
+};
+
+const generateSamplePatternTwoData = () => {
+  const timeSlots = ['morning', 'afternoon', 'evening'];
+  const teams = [
+    ['Barcelona', 'Real Madrid'],
+    ['Bayern', 'Dortmund'],
+    ['PSG', 'Lyon'],
+    ['Inter', 'Milan']
+  ];
+  
+  return teams.flatMap(([home, away]) => ([
+    {
+      match: {
+        id: Math.random().toString(),
+        homeTeam: home,
+        awayTeam: away,
+        homeOdds: '1.00',
+        drawOdds: '3.50',
+        awayOdds: '4.20',
+        kickoff: new Date().toISOString(),
+        league: 'Various Leagues',
+        matchResult: 'HOME_WIN' as const
+      },
+      pattern: 'target_odd_home',
+      timeSlot: timeSlots[Math.floor(Math.random() * timeSlots.length)],
+      result: 'HOME_WIN'
+    }
+  ]));
 };
 
 export default AIAnalysis;

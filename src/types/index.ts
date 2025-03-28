@@ -56,3 +56,20 @@ export interface WeeklyInsight {
   confidence: number;
   recommendation: string;
 }
+
+export interface PatternMatch {
+  match: Match;
+  pattern: string;
+  timeSlot: string;
+  result: string;
+}
+
+export interface PredictionResult {
+  prediction: string;
+  confidence: number;
+}
+
+export interface PatternAnalysis {
+  patternOneResults: PatternMatch[];
+  patternTwoResults: PatternMatch[];
+}

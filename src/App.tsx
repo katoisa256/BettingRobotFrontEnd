@@ -7,6 +7,7 @@ import UpcomingMatches from './pages/UpcomingMatches';
 import TodaysMatches from './pages/TodaysMatches';
 import CompletedMatches from './pages/CompletedMatches';
 import AIAnalysis from './pages/AIAnalysis';
+import Predictions from './pages/Predictions';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/today" element={<TodaysMatches />} />
             <Route path="/completed" element={<CompletedMatches />} />
             <Route path="/analysis" element={<AIAnalysis />} />
+            <Route path="/predictions" element={<Predictions />} />
           </Routes>
         </main>
         
@@ -31,4 +33,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
