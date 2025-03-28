@@ -44,6 +44,26 @@ Welcome to **Betting Robot**, an advanced AI-powered betting analytics platform 
 
 ---
 
+## 🤖 AI Model Details
+The AI models used in **Betting Robot** are designed to provide accurate and actionable insights for sports betting. Below are the details:
+
+### Machine Learning Models
+- **Prediction Model:** Built using **TensorFlow.js** for in-browser predictions and a **Python-based TensorFlow backend** for complex computations.
+- **Data Analysis Model:** Uses **scikit-learn** for feature extraction and trend analysis.
+- **Natural Language Processing (NLP):** Implements **spaCy** for analyzing sports-related news and updates.
+
+### Training Data
+- Historical sports betting odds and match results.
+- Real-time scraped data from multiple sports betting platforms.
+- Enriched with external datasets for improved accuracy.
+
+### Model Features
+- **Win Probability Estimation:** Predicts the likelihood of a team winning based on historical and real-time data.
+- **Odds Trend Analysis:** Identifies fluctuations and patterns in betting odds.
+- **Customizable Parameters:** Allows users to adjust model sensitivity for personalized predictions.
+
+---
+
 ## 🔧 Installation & Setup
 ### Prerequisites
 Ensure you have the following installed:
@@ -54,3 +74,4 @@ Ensure you have the following installed:
 ```sh
 git clone https://github.com/your-username/betting-robot.git
 cd betting-robot
+```
