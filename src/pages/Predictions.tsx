@@ -12,6 +12,22 @@ const Predictions: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [predicting, setPredicting] = useState(false);
   const [usingSampleData, setUsingSampleData] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  // Filter matches based on search query
+  const filteredMatches = matches.filter(match => 
+    match.homeTeam.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    match.awayTeam.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Paginate filtered matches
+  const paginatedMatches = filteredMatches.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  const totalPages = Math.ceil(filteredMatches.length / itemsPerPage);
 
   const fetchData = async () => {
     try {
@@ -21,11 +37,11 @@ const Predictions: React.FC = () => {
       setUsingSampleData(false);
     } catch (error) {
       console.error('Error fetching matches:', error);
-      // Fallback to sample data
       setMatches(generateSampleMatches());
       setUsingSampleData(true);
     } finally {
       setLoading(false);
+      setCurrentPage(1);
     }
   };
 
@@ -38,7 +54,6 @@ const Predictions: React.FC = () => {
       setPredictions(prev => new Map(prev).set(match.id, prediction));
     } catch (error) {
       console.error('Error getting prediction:', error);
-      // Use sample prediction as fallback
       setPredictions(prev => new Map(prev).set(match.id, {
         prediction: ['HOME_WIN', 'DRAW', 'AWAY_WIN'][Math.floor(Math.random() * 3)],
         confidence: 0.65 + Math.random() * 0.2
@@ -87,10 +102,23 @@ const Predictions: React.FC = () => {
         </div>
       )}
 
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search teams..."
+          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={searchQuery}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+            setCurrentPage(1);
+          }}
+        />
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div className="lg:col-span-2">
           <div className="space-y-4">
-            {matches.map(match => (
+            {paginatedMatches.map(match => (
               <MatchPredictionCard
                 key={match.id}
                 match={match}
@@ -99,7 +127,35 @@ const Predictions: React.FC = () => {
                 isPredicting={predicting}
               />
             ))}
+
+            {filteredMatches.length === 0 && (
+              <div className="text-center py-8 text-gray-600">
+                No matches found matching your search criteria.
+              </div>
+            )}
           </div>
+
+          {totalPages > 0 && (
+            <div className="flex justify-between items-center mt-6">
+              <button
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors"
+              >
+                Previous
+              </button>
+              <span className="text-gray-600">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="space-y-6">
@@ -111,14 +167,18 @@ const Predictions: React.FC = () => {
   );
 };
 
-// Sample data generation
 const generateSampleMatches = (): Match[] => {
   const teams = [
     ['Arsenal', 'Chelsea'],
     ['Liverpool', 'Man City'],
     ['Barcelona', 'Real Madrid'],
     ['Bayern Munich', 'Dortmund'],
-    ['PSG', 'Lyon']
+    ['PSG', 'Lyon'],
+    ['Juventus', 'AC Milan'],
+    ['Atletico Madrid', 'Sevilla'],
+    ['Manchester United', 'Tottenham'],
+    ['Inter Milan', 'Napoli'],
+    ['Borussia Mönchengladbach', 'RB Leipzig']
   ];
 
   return teams.map(([home, away]) => ({
