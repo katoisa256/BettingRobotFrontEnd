@@ -1,3 +1,5 @@
+// Update time frame ..
+// Update UI based on odds and also the odds selction tool.
 import React, { useEffect, useState } from 'react';
 import { Brain, RefreshCw, AlertTriangle } from 'lucide-react';
 import { analyzePatterns } from '../services/api';

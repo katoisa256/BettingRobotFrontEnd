@@ -50,7 +50,9 @@ const Predictions: React.FC = () => {
 
     try {
       setPredicting(true);
+      console.log('Predicting ....');
       const prediction = await predictMatch(match);
+      console.log('Prediction:', prediction);
       setPredictions(prev => new Map(prev).set(match.id, prediction));
     } catch (error) {
       console.error('Error getting prediction:', error);

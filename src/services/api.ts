@@ -6,6 +6,7 @@ const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 const api = axios.create({
   baseURL: API_URL,
   headers: {
+    'ngrok-skip-browser-warning': 'true',
     'Content-Type': 'application/json',
   },
 });
@@ -13,11 +14,12 @@ const api = axios.create({
 const health = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
   headers: {
+    'ngrok-skip-browser-warning': 'true',
     'Content-Type': 'application/json',
   },
 });
 
-// Existing API calls...
+
 export const fetchAllMatches = async (): Promise<Match[]> => {
   const response = await api.get<Match[]>('/matches');
   return response.data;
@@ -58,7 +60,6 @@ export const checkHealth = async (): Promise<{ status: string }> => {
   return response.data;
 };
 
-// New API calls for odds analysis
 export const analyzePatterns = async (): Promise<PatternAnalysis> => {
   const response = await api.get<PatternAnalysis>('/analysis/patterns');
   return response.data;
@@ -79,7 +80,6 @@ export const fetchWeeklyOddsAnalysis = async (): Promise<OddsAnalysis[]> => {
   // This would be an actual API call in production
   return [
     { date: '2025-01-01', homeWinRate: 0.45, drawRate: 0.25, awayWinRate: 0.30, averageHomeOdds: 2.1, averageDrawOdds: 3.2, averageAwayOdds: 3.5, totalMatches: 42 },
-    // ... other mock data
   ];
 };
 
@@ -87,7 +87,6 @@ export const fetchLeaguePerformance = async (): Promise<LeaguePerformance[]> => 
   // Mock data
   return [
     { league: 'Premier League', homeWinRate: 0.48, drawRate: 0.24, awayWinRate: 0.28, totalMatches: 120 },
-    // ... other mock data
   ];
 };
 
@@ -95,7 +94,6 @@ export const fetchOddsPatterns = async (): Promise<OddsPattern[]> => {
   // Mock data
   return [
     { pattern: 'Home favorite (odds < 1.5)', occurrences: 78, successRate: 0.72, averageOdds: 1.35, profitMargin: 0.08 },
-    // ... other mock data
   ];
 };
 
@@ -103,6 +101,5 @@ export const fetchWeeklyInsights = async (): Promise<WeeklyInsight[]> => {
   // Mock data
   return [
     { week: 'Week 1', topPattern: 'Home favorites in Premier League', profitability: 0.12, confidence: 0.85, recommendation: 'Back home favorites in Premier League matches' },
-    // ... other mock data
   ];
 };

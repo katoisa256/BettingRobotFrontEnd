@@ -1,0 +1,128 @@
+const data = [  
+  {
+    homeTeam: 'AZ Alkmaar',
+    awayTeam: 'NAC Breda',
+    homeOdds: '1.54',
+    drawOdds: '4.40',
+    awayOdds: '5.50',
+    kickoff: '2025-04-24T16:45:00.000Z',
+    league: 'Eredivisie'
+  },
+  {
+    homeTeam: 'Djurgardens IF',
+    awayTeam: 'Osters IF',
+    homeOdds: '1.48',
+    drawOdds: '4.40',
+    awayOdds: '6.25',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'Allsvenskan'
+  },
+  {
+    homeTeam: 'IFK Varnamo',
+    awayTeam: 'AIK',
+    homeOdds: '3.15',
+    drawOdds: '3.10',
+    awayOdds: '2.40',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'Allsvenskan'
+  },
+  {
+    homeTeam: 'GAIS',
+    awayTeam: 'IF Brommapojkarna',
+    homeOdds: '2.19',
+    drawOdds: '3.55',
+    awayOdds: '3.10',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'Allsvenskan'
+  },
+  {
+    homeTeam: 'IFK Norrkoping FK',
+    awayTeam: 'IFK Goteborg',
+    homeOdds: '2.30',
+    drawOdds: '3.45',
+    awayOdds: '3.00',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'Allsvenskan'
+  },
+  {
+    homeTeam: 'Racing de Casablanca',
+    awayTeam: 'Olympique Khouribga',
+    homeOdds: '2.30',
+    drawOdds: '2.80',
+    awayOdds: '3.25',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'Morocco Botola 2'
+  },
+  {
+    homeTeam: 'CA Osasuna',
+    awayTeam: 'Sevilla FC',
+    homeOdds: '2.45',
+    drawOdds: '3.15',
+    awayOdds: '3.50',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'LaLiga'
+  },
+  {
+    homeTeam: 'CD Leganes',
+    awayTeam: 'Girona FC',
+    homeOdds: '3.15',
+    drawOdds: '3.20',
+    awayOdds: '2.60',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'LaLiga'
+  },
+  {
+    homeTeam: 'Paradou AC',
+    awayTeam: 'ES Sétif',
+    homeOdds: '2.45',
+    drawOdds: '2.80',
+    awayOdds: '3.45',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'Algeria Ligue Professionnelle 1'
+  },
+  {
+    homeTeam: 'ASC Jaraaf',
+    awayTeam: 'Oslo FA',
+    homeOdds: '1.22',
+    drawOdds: '4.70',
+    awayOdds: '14.00',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'Premier League'
+  },
+  {
+    homeTeam: 'FC Torpedo Kutaisi',
+    awayTeam: 'FC Gagra',
+    homeOdds: '1.55',
+    drawOdds: '3.75',
+    awayOdds: '5.25',
+    kickoff: '2025-04-24T17:00:00.000Z',
+    league: 'Erovnuli Liga'
+  },
+  {
+    homeTeam: 'Mjoendalen IF',
+    awayTeam: 'Stroemsgodset IF',
+    homeOdds: '8.75',
+    drawOdds: '5.25',
+    awayOdds: '1.25',
+    kickoff: '2025-04-24T17:05:00.000Z',
+    league: 'NM Cup'
+  },
+  {
+    homeTeam: 'FC CFR 1907 Cluj',
+    awayTeam: 'FC Farul Constanta',
+    homeOdds: '1.39',
+    drawOdds: '4.25',
+    awayOdds: '6.75',
+    kickoff: '2025-04-24T17:30:00.000Z',
+    league: 'Romania Cup'
+  },
+  {
+    homeTeam: 'Trabzonspor',
+    awayTeam: 'Goztepe Izmir',
+    homeOdds: '1.97',
+    drawOdds: '3.35',
+    awayOdds: '3.35',
+    kickoff: '2025-04-24T17:30:00.000Z',
+    league: 'Turkiye Kupasi'
+  }
+]
