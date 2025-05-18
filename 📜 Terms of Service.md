@@ -44,6 +44,6 @@ We may update these Terms of Service at any time. Your continued use of the plat
 ## 10. Contact Information
 For questions or concerns regarding these terms, contact us at:
 - **Email**: kato.isa@tgnsystems.org
-- **Website**: [Your Website URL]
+- **Website**: [[Your Website URL](https://kato-isa-omoding.vercel.app/)]
 
 By using **Betting Robot**, you agree to these terms. Please gamble responsibly. 🎯
