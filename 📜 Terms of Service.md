@@ -1,6 +1,6 @@
 # 📜 Terms of Service
 
-_Last Updated: [Insert Date]_
+_Last Updated: 19/05/25
 
 Welcome to **Betting Robot**! By using our platform, you agree to abide by the following terms and conditions. Please read them carefully.
 
